@@ -7,6 +7,14 @@ LexicalAnalyzer::LexicalAnalyzer(char* input_file)
 	ifstream file_to_read(input_file);
 	if (file_to_read.is_open())
 	{
+		/*
+		while (file_to_read.peek() != EOF)
+		{
+
+			//character = file_to_read.get();
+			//cout << "from file: " << character <<endl;
+			input_file.push_back(file_to_read.get()); //reads the file into the data member
+			how AJ made it-- he also put input_file_in */
 		while (!file_to_read.eof())
 		{
 			file_to_read >> character;
@@ -63,7 +71,7 @@ void LexicalAnalyzer::reset()
 
 string LexicalAnalyzer::scan()
 {
-	
+
 
 	//the following vectors order automata by precidence
 	vector <Automaton*> automata;
@@ -93,10 +101,11 @@ string LexicalAnalyzer::scan()
 	automata.push_back(new Comment());
 	automata.push_back(new WhiteSpace());
 
-	while (current_iteration <= input_file.size())
+	while (current_iteration < input_file.size()-1) //for some reason need -1
 	{
-		for (unsigned int i = current_iteration; i < input_file.size(); i++) //this loop iterates through file
+		for (unsigned int i = current_iteration; i < input_file.size()-1; i++) //this loop iterates through file
 		{
+			cout << "file size is " << input_file.size() << endl;
 			for (unsigned int j = 0; j < automata.size(); j++)//this loop lets each automata read current iteration
 			{
 				automata[j]->read(i, input_file); //MAY HAVE to increment i extra based on amount read
@@ -106,14 +115,17 @@ string LexicalAnalyzer::scan()
 				precidence by only changing if it exceeds the previous max.*/
 				if (new_max_readings > max_readings)
 				{
+					cout << "\n max reading change i=" << i << " j=" << j << endl;
 					it_of_max_readings = j;
 					max_readings = new_max_readings;
 				}
 			}
 		}
 		tokens.push_back(automata[it_of_max_readings]->tokenize(current_iteration, input_file));
+		cout << "here " << current_iteration << "then ";
 		current_iteration += max_readings; //move iteration to point beyond end of last token made
-	} 
+		cout << current_iteration << "\nComma readings = " << automata[it_of_max_readings]->getReadings() << endl;
+	}
 	string name_EOF = "EOF";
 	string content_EOF = "";
 	Token token_EOF(name_EOF, content_EOF, current_line);
@@ -122,7 +134,7 @@ string LexicalAnalyzer::scan()
 	for (unsigned int i = 0; i < tokens.size(); i++)
 	{
 		token_list << tokens[i].getToken();
-		if (i < tokens.size() -1)//if i is not on the last token (EOF)
+		if (i < tokens.size())//if i is not on the last token (EOF)
 		{
 			token_list << endl;
 		}

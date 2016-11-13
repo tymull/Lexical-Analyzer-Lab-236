@@ -35,7 +35,7 @@ protected:
 	vector <char> temp_file;
 	int current_iteration = 0; //this marks where in input_file we begin reading
 public:
-	LexicalAnalyzer(char* input_file);
+	LexicalAnalyzer(char* input_file_in);
 	~LexicalAnalyzer(); //&input file as a paramater
 	vector <char> getInputFile();
 	void analyze(char* input_file); //can change value of input_file
@@ -44,4 +44,3 @@ public:
 	string scan(); //will scan file using all automata subclasses and output tokens
 
 };
-

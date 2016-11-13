@@ -71,7 +71,7 @@ bool Queries::r(int it, const vector <char>& input_file)
 
 bool Queries::e1(int it, const vector <char>& input_file)
 {
-	if (getChar(it, input_file) == 'e1')
+	if (getChar(it, input_file) == 'e')
 	{
 		readings++;
 		it++;
