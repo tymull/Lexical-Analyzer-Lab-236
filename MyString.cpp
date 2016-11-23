@@ -10,10 +10,12 @@ MyString::~MyString()
 {
 }
 
+
 int MyString::getReadings()
 {
 	return readings;
 }
+
 
 bool MyString::endString(int it, const vector <char>& input_file)
 {
@@ -29,6 +31,7 @@ bool MyString::endString(int it, const vector <char>& input_file)
 	}
 }
 
+
 bool MyString::isStuff(int it, const vector <char>& input_file)
 {
 	if (getChar(it, input_file) == '\'')
@@ -41,6 +44,13 @@ bool MyString::isStuff(int it, const vector <char>& input_file)
 	{
 		return false; //this makes it undefined
 	}
+	else if (getChar(it, input_file) == '\n') //catches new lines within read()
+	{
+		extra_lines++;
+		readings++;
+		it++;
+		return isStuff(it, input_file);
+	}
 	else
 	{
 		readings++;
@@ -48,6 +58,7 @@ bool MyString::isStuff(int it, const vector <char>& input_file)
 		return isStuff(it, input_file);
 	}
 }
+
 
 bool MyString::read(int it, const vector <char>& input_file)
 {
@@ -61,4 +72,21 @@ bool MyString::read(int it, const vector <char>& input_file)
 	{
 		return false;
 	}
+}
+
+
+void MyString::resetReadings()
+{
+	readings = 0;
+}
+
+
+Token MyString::tokenize(unsigned int& current_line, int it, const vector <char>& input_file)
+{
+	string name = "STRING";
+	string content(input_file.begin() + it, input_file.begin() + it + readings); // for some crazy reason, can't put input_file[it]
+	int line = current_line; //this returns line that it started on
+	current_line += extra_lines; //this adds new lines from method to Lexical Analyzer that would have been skipped
+	Token token(name, content, line);
+	return token;
 }

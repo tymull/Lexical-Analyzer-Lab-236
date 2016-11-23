@@ -10,10 +10,12 @@ Add::~Add()
 {
 }
 
+
 int Add::getReadings()
 {
 	return readings;
 }
+
 
 bool Add::read(int it, const vector <char>& input_file)
 {
@@ -26,4 +28,19 @@ bool Add::read(int it, const vector <char>& input_file)
 	{
 		return false;
 	}
+}
+
+
+void Add::resetReadings()
+{
+	readings = 0;
+}
+
+
+Token Add::tokenize(unsigned int& current_line, int it, const vector <char>& input_file)
+{
+	string name = "ADD";
+	string content("+");
+	Token token(name, content, current_line);
+	return token;
 }

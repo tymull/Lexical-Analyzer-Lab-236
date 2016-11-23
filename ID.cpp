@@ -10,10 +10,12 @@ ID::~ID()
 {
 }
 
+
 int ID::getReadings()
 {
 	return readings;
 }
+
 
 bool ID::stillID(int it, const vector <char>& input_file)
 {
@@ -34,6 +36,7 @@ bool ID::stillID(int it, const vector <char>& input_file)
 	}
 }
 
+
 bool ID::read(int it, const vector <char>& input_file)
 {
 	if (isalpha(getChar(it, input_file))) //checks to see if first character is a letter
@@ -47,3 +50,19 @@ bool ID::read(int it, const vector <char>& input_file)
 		return false;
 	}
 }
+
+
+void ID::resetReadings()
+{
+	readings = 0;
+}
+
+
+Token ID::tokenize(unsigned int& current_line, int it, const vector <char>& input_file)
+{
+	string name = "ID";
+	string content(input_file.begin() + it, input_file.begin() + it + readings); // for some crazy reason, can't put input_file[it]
+	Token token(name, content, current_line);
+	return token;
+}
+

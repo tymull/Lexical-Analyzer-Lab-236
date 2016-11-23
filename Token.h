@@ -15,7 +15,7 @@ public:
 	~Token();
 	string getName();
 	string getContent();
-	int getLine();
+	int getMyLine();
 	string getToken();
 };
 

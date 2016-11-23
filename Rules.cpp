@@ -10,10 +10,12 @@ Rules::~Rules()
 {
 }
 
+
 int Rules::getReadings()
 {
 	return readings;
 }
+
 
 bool Rules::s(int it, const vector <char>& input_file)
 {
@@ -27,6 +29,7 @@ bool Rules::s(int it, const vector <char>& input_file)
 		return false;
 	}
 }
+
 
 bool Rules::e(int it, const vector <char>& input_file)
 {
@@ -42,6 +45,7 @@ bool Rules::e(int it, const vector <char>& input_file)
 	}
 }
 
+
 bool Rules::l(int it, const vector <char>& input_file)
 {
 	if (getChar(it, input_file) == 'l')
@@ -55,6 +59,7 @@ bool Rules::l(int it, const vector <char>& input_file)
 		return false;
 	}
 }
+
 
 bool Rules::u(int it, const vector <char>& input_file)
 {
@@ -70,6 +75,7 @@ bool Rules::u(int it, const vector <char>& input_file)
 	}
 }
 
+
 bool Rules::read(int it, const vector <char>& input_file)
 {
 	if (getChar(it, input_file) == 'R')
@@ -84,3 +90,17 @@ bool Rules::read(int it, const vector <char>& input_file)
 	}
 }
 
+
+void Rules::resetReadings()
+{
+	readings = 0;
+}
+
+
+Token Rules::tokenize(unsigned int& current_line, int it, const vector <char>& input_file)
+{
+	string name = "RULES";
+	string content("Rules");
+	Token token(name, content, current_line);
+	return token;
+}

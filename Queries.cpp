@@ -10,10 +10,12 @@ Queries::~Queries()
 {
 }
 
+
 int Queries::getReadings()
 {
 	return readings;
 }
+
 
 bool Queries::s(int it, const vector <char>& input_file)
 {
@@ -28,6 +30,7 @@ bool Queries::s(int it, const vector <char>& input_file)
 	}
 }
 
+
 bool Queries::e2(int it, const vector <char>& input_file)
 {
 	if (getChar(it, input_file) == 'e')
@@ -40,6 +43,7 @@ bool Queries::e2(int it, const vector <char>& input_file)
 		return false;
 	}
 }
+
 
 bool Queries::i(int it, const vector <char>& input_file)
 {
@@ -55,6 +59,7 @@ bool Queries::i(int it, const vector <char>& input_file)
 	}
 }
 
+
 bool Queries::r(int it, const vector <char>& input_file)
 {
 	if (getChar(it, input_file) == 'r')
@@ -69,9 +74,10 @@ bool Queries::r(int it, const vector <char>& input_file)
 	}
 }
 
+
 bool Queries::e1(int it, const vector <char>& input_file)
 {
-	if (getChar(it, input_file) == 'e1')
+	if (getChar(it, input_file) == 'e')
 	{
 		readings++;
 		it++;
@@ -82,6 +88,7 @@ bool Queries::e1(int it, const vector <char>& input_file)
 		return false;
 	}
 }
+
 
 bool Queries::u(int it, const vector <char>& input_file)
 {
@@ -97,6 +104,7 @@ bool Queries::u(int it, const vector <char>& input_file)
 	}
 }
 
+
 bool Queries::read(int it, const vector <char>& input_file)
 {
 	if (getChar(it, input_file) == 'Q')
@@ -109,4 +117,19 @@ bool Queries::read(int it, const vector <char>& input_file)
 	{
 		return false;
 	}
+}
+
+
+void Queries::resetReadings()
+{
+	readings = 0;
+}
+
+
+Token Queries::tokenize(unsigned int& current_line, int it, const vector <char>& input_file)
+{
+	string name = "QUERIES";
+	string content("Queries");
+	Token token(name, content, current_line);
+	return token;
 }

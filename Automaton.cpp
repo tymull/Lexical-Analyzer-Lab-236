@@ -16,11 +16,11 @@ char Automaton::getChar(int it, const vector <char>& input_file)
 }
 
 //will probably make this virtual or used for undefined
-Token Automaton::tokenize(int it, const vector <char>& input_file)
+Token Automaton::tokenize(unsigned int& current_line, int it, const vector <char>& input_file)
 {
 	string name = "ERROR";
 	string content = "--came from Automaton--";
-	int line = -1;
+	int line = 0;
 	Token error(name, content, line);
 	return error;
 }

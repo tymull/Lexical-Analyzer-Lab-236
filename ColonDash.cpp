@@ -10,10 +10,12 @@ ColonDash::~ColonDash()
 {
 }
 
+
 int ColonDash::getReadings()
 {
 	return readings;
 }
+
 
 bool ColonDash::dashCheck(int it, const vector <char>& input_file)
 {
@@ -28,6 +30,7 @@ bool ColonDash::dashCheck(int it, const vector <char>& input_file)
 	}
 }
 
+
 bool ColonDash::read(int it, const vector <char>& input_file)
 {
 	if (getChar(it, input_file) == ':')
@@ -40,4 +43,19 @@ bool ColonDash::read(int it, const vector <char>& input_file)
 	{
 		return false;
 	}
+}
+
+
+void ColonDash::resetReadings()
+{
+	readings = 0;
+}
+
+
+Token ColonDash::tokenize(unsigned int& current_line, int it, const vector <char>& input_file)
+{
+	string name = "COLON_DASH";
+	string content(":-");
+	Token token(name, content, current_line);
+	return token;
 }

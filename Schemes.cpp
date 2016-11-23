@@ -10,10 +10,12 @@ Schemes::~Schemes()
 {
 }
 
+
 int Schemes::getReadings()
 {
 	return readings;
 }
+
 
 bool Schemes::s(int it, const vector <char>& input_file)
 {
@@ -28,6 +30,7 @@ bool Schemes::s(int it, const vector <char>& input_file)
 	}
 }
 
+
 bool Schemes::e2(int it, const vector <char>& input_file)
 {
 	if (getChar(it, input_file) == 'e')
@@ -40,6 +43,7 @@ bool Schemes::e2(int it, const vector <char>& input_file)
 		return false;
 	}
 }
+
 
 bool Schemes::m(int it, const vector <char>& input_file)
 {
@@ -55,6 +59,7 @@ bool Schemes::m(int it, const vector <char>& input_file)
 	}
 }
 
+
 bool Schemes::e1(int it, const vector <char>& input_file)
 {
 	if (getChar(it, input_file) == 'e')
@@ -68,6 +73,7 @@ bool Schemes::e1(int it, const vector <char>& input_file)
 		return false;
 	}
 }
+
 
 bool Schemes::h(int it, const vector <char>& input_file)
 {
@@ -83,6 +89,7 @@ bool Schemes::h(int it, const vector <char>& input_file)
 	}
 }
 
+
 bool Schemes::c(int it, const vector <char>& input_file)
 {
 	if (getChar(it, input_file) == 'c')
@@ -97,6 +104,7 @@ bool Schemes::c(int it, const vector <char>& input_file)
 	}
 }
 
+
 bool Schemes::read(int it, const vector <char>& input_file)
 {
 	if (getChar(it, input_file) == 'S')
@@ -109,4 +117,19 @@ bool Schemes::read(int it, const vector <char>& input_file)
 	{
 		return false;
 	}
+}
+
+
+void Schemes::resetReadings()
+{
+	readings = 0;
+}
+
+
+Token Schemes::tokenize(unsigned int& current_line, int it, const vector <char>& input_file)
+{
+	string name = "SCHEMES";
+	string content("Schemes");
+	Token token(name, content, current_line);
+	return token;
 }

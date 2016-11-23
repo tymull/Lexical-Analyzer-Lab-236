@@ -13,6 +13,7 @@ public:
 	int getReadings();
 	//bool getChar(); //Will see if current character is a ','
 	bool read(int it, const vector <char>& input_file);
-	Token tokenize(int it, const vector <char>& input_file);
+	void resetReadings();
+	Token tokenize(unsigned int& current_line, int it, const vector <char>& input_file);
 };
 
