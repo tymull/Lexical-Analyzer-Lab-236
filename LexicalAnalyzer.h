@@ -25,6 +25,7 @@
 #include "LineComment.h"
 #include "BlockComment.h"
 #include "WhiteSpace.h"
+#include "MyUndefined.h"
 
 using namespace std;
 

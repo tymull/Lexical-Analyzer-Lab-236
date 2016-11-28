@@ -27,7 +27,7 @@ bool Comma::read(int it, const vector <char>& input_file)
 	if (getChar(it, input_file) == ',') //checks to see if current iteration is a ','
 	{
 		readings++; //indicates that it successfully read
-		cout << "Comma readings=" << readings;
+		//cout << "Comma readings=" << readings;
 		return true;
 	}
 	else

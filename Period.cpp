@@ -21,6 +21,7 @@ bool Period::read(int it, const vector <char>& input_file)
 {
 	if (getChar(it, input_file) == '.')
 	{
+		//cout << "\nhi period\n";
 		readings++; //indicates that it successfully read
 		return true;
 	}

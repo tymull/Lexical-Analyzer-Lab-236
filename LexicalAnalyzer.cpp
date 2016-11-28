@@ -3,22 +3,24 @@
 
 LexicalAnalyzer::LexicalAnalyzer(char* input_file)
 {
-	char character;
+	//char character;
 	ifstream file_to_read(input_file);
 	if (file_to_read.is_open())
 	{
-		/*
+
 		while (file_to_read.peek() != EOF)
 		{
 
 			//character = file_to_read.get();
 			//cout << "from file: " << character <<endl;
-			input_file.push_back(file_to_read.get()); //reads the file into the data member
-			how AJ made it-- he also put input_file_in */
+			this->input_file.push_back(file_to_read.get()); //reads the file into the data member
+			//how AJ made it-- he also put input_file_in */
+/*
 		while (!file_to_read.eof())
 		{
 			file_to_read >> character;
 			this->input_file.push_back(character); //reads the file into the data member
+			*/
 		}
 		file_to_read.close();
 	}
@@ -75,11 +77,9 @@ string LexicalAnalyzer::scan()
 
 	//the following vectors order automata by precidence
 	vector <Automaton*> automata;
-	vector <int> automata_readings;
+	//vector <int> automata_readings;
 	vector <Token> tokens;
-	int max_readings = 0;
-	int new_max_readings = 0;
-	int it_of_max_readings = -1; //current iteration of max readings. initialized to -1 in case none read.
+
 	unsigned int current_iteration = 0; //this is first iteration for iterating through file. Can increment after tokens made
 	unsigned int current_line = 1; //current line in file starts at 1
 
@@ -100,11 +100,15 @@ string LexicalAnalyzer::scan()
 	automata.push_back(new MyString());
 	automata.push_back(new LineComment());
 	automata.push_back(new BlockComment());
+	automata.push_back(new MyUndefined());
 	automata.push_back(new WhiteSpace());
 
 	while (current_iteration < input_file.size()-1) //for some reason need -1 this loop iterates through file
 	{
-		cout << "file size is " << input_file.size() << endl;
+		int max_readings = 0;
+		int new_max_readings = 0;
+		int it_of_max_readings = -1; //current iteration of max readings. initialized to -1 in case none read.
+		//cout << "file size is " << input_file.size() << endl;
 		if (input_file[current_iteration] == '\n')
 		{
 			current_line++;
@@ -121,22 +125,34 @@ string LexicalAnalyzer::scan()
 				precidence by only changing if it exceeds the previous max.*/
 				if (new_max_readings > max_readings)
 				{
-					cout << "\n max reading change c_i=" << current_iteration << " i=" << i << endl;
+					//cout << "\n max reading change c_i=" << current_iteration << " i=" << i << endl;
 					it_of_max_readings = i;
 					max_readings = new_max_readings;
 				}
-				//this will set readings back to 0 for each automata before it moves forward in file
-				automata[i]->resetReadings();
+
 			}
-			if (it_of_max_readings != automata.size()) //because this would be a white space
+			if (it_of_max_readings != automata.size()-1) //because this would be a white space
 			{
 				tokens.push_back(automata[it_of_max_readings]->tokenize(current_line, current_iteration, input_file));
-				cout << "here " << current_iteration << "then ";
+				//this will set readings back to 0 for each automata before it moves forward in file
+				for (unsigned int i = 0; i < automata.size(); i++)
+				{
+					automata[i]->resetReadings(); //just clears all because sometimes more than one reads
+				}
+				/*
+				automata[it_of_max_readings]->resetReadings();
+				automata[13]->resetReadings();//this will reset the ID automaton which may have read as well
+				automata[17]->resetReadings();//this will reset the UNDEFINED automaton which may have read as well
+				--block comment, mystring, :-
+				*/
+				//cout << "here " << current_iteration << "then ";
 				current_iteration += max_readings; //move iteration to point beyond end of last token made
-				cout << current_iteration << "\nComma readings = " << automata[it_of_max_readings]->getReadings() << endl;
+				//cout << current_iteration << "\nComma readings = " << automata[it_of_max_readings]->getReadings() << endl;
 			}
 			else
 			{
+				//this will set readings back to 0 for each automata before it moves forward in file
+				automata[it_of_max_readings]->resetReadings(); //only Whitespace reads white space
 				current_iteration += max_readings; //this way it just skips over white space and doesn't make a token
 			}
 		}
@@ -146,13 +162,11 @@ string LexicalAnalyzer::scan()
 	Token token_EOF(name_EOF, content_EOF, current_line);
 	tokens.push_back(token_EOF);
 	stringstream token_list;
-	for (unsigned int i = 0; i < tokens.size(); i++)
+	for (unsigned int i = 0; i < tokens.size(); i++) //getting tokens to print out
 	{
-		token_list << tokens[i].getToken();
-		if (i < tokens.size())//if i is not on the last token (EOF)
-		{
-			token_list << endl;
-		}
+		token_list << tokens[i].getToken() << endl;
 	}
+	int total_tokens = tokens.size();
+	token_list << "Total Tokens = " << total_tokens << endl;
 	return token_list.str();
 }
