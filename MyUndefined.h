@@ -11,7 +11,7 @@ public:
 	MyUndefined();
 	~MyUndefined();
 	int getReadings();
-  bool badID(int it, const vector <char>& input_file);//for detecting invalid IDs
+  //bool badID(int it, const vector <char>& input_file);//for detecting invalid IDs
   bool endBlock(int it, const vector <char>& input_file);//for detecting unclosed block comments
 	bool isBlock(int it, const vector <char>& input_file);//for detecting unclosed block comments
 	bool lineOrBlock(int it, const vector <char>& input_file);//for detecting unclosed block comments

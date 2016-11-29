@@ -16,7 +16,7 @@ int MyUndefined::getReadings()
 	return readings;
 }
 
-
+/*
 bool MyUndefined::badID(int it, const vector <char>& input_file)
 {
 	if (isalnum(getChar(it, input_file)))
@@ -35,7 +35,7 @@ bool MyUndefined::badID(int it, const vector <char>& input_file)
 		return true; //reached some symbol
 	}
 }
-
+*/
 
 bool MyUndefined::endBlock(int it, const vector <char>& input_file)
 {
@@ -164,8 +164,9 @@ bool MyUndefined::read(int it, const vector <char>& input_file)
   if (isdigit(getChar(it, input_file))) //checks to see if first character is a number and therefore not ID
 	{
 		readings++; //indicates that it successfully read
-		it++;
-		return badID(it, input_file);
+		return true; //only reads one digit at a time as undefined
+		//it++;
+		//return badID(it, input_file);
 	}
   else if (getChar(it, input_file) == '#')
 	{
