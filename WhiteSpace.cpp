@@ -1,11 +1,8 @@
 #include "WhiteSpace.h"
 
 
-WhiteSpace::WhiteSpace()//(vector <char> input_file)
-//:Automaton(input_file)
+WhiteSpace::WhiteSpace()
 {
-	// Nothing to do
-//	this->input_file = input_file;
 }
 
 
@@ -13,10 +10,12 @@ WhiteSpace::~WhiteSpace()
 {
 }
 
+
 int WhiteSpace::getReadings()
 {
 	return readings;
 }
+
 
 bool WhiteSpace::read(int it, const vector<char>& input_file)
 {
@@ -29,4 +28,20 @@ bool WhiteSpace::read(int it, const vector<char>& input_file)
 	{
 		return false;
 	}
+}
+
+
+void WhiteSpace::resetReadings()
+{
+	readings = 0;
+}
+
+
+Token WhiteSpace::tokenize(unsigned int& current_line, int it, const vector <char>& input_file)
+{
+	string name = "ERROR";
+	string content = "--came from WhiteSpace--";
+	int line = 0;
+	Token error(name, content, line);
+	return error;
 }

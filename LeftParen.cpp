@@ -10,10 +10,12 @@ LeftParen::~LeftParen()
 {
 }
 
+
 int LeftParen::getReadings()
 {
 	return readings;
 }
+
 
 bool LeftParen::read(int it, const vector <char>& input_file)
 {
@@ -26,4 +28,19 @@ bool LeftParen::read(int it, const vector <char>& input_file)
 	{
 		return false;
 	}
+}
+
+
+void LeftParen::resetReadings()
+{
+	readings = 0;
+}
+
+
+Token LeftParen::tokenize(unsigned int& current_line, int it, const vector <char>& input_file)
+{
+	string name = "LEFT_PAREN";
+	string content("(");
+	Token token(name, content, current_line);
+	return token;
 }

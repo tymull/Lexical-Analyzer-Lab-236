@@ -17,7 +17,8 @@ public:
 	char getChar(int it, const vector <char>& input_file); //just do it++ when need to read in more recursively
 	bool virtual read(int it, const vector <char>& input_file) = 0;
 	int virtual getReadings() = 0;
-	Token virtual tokenize(int it, const vector <char>& input_file);
+	void virtual resetReadings() = 0;
+	Token virtual tokenize(unsigned int& current_line, int it, const vector <char>& input_file);
 
 };
 

@@ -10,10 +10,12 @@ Facts::~Facts()
 {
 }
 
+
 int Facts::getReadings()
 {
 	return readings;
 }
+
 
 bool Facts::s(int it, const vector <char>& input_file)
 {
@@ -24,9 +26,11 @@ bool Facts::s(int it, const vector <char>& input_file)
 	}
 	else
 	{
+		readings = 0; //because this could be an ID
 		return false;
 	}
 }
+
 
 bool Facts::t(int it, const vector <char>& input_file)
 {
@@ -38,9 +42,11 @@ bool Facts::t(int it, const vector <char>& input_file)
 	}
 	else
 	{
+		readings = 0; //because this could be an ID
 		return false;
 	}
 }
+
 
 bool Facts::c(int it, const vector <char>& input_file)
 {
@@ -52,9 +58,11 @@ bool Facts::c(int it, const vector <char>& input_file)
 	}
 	else
 	{
+		readings = 0; //because this could be an ID
 		return false;
 	}
 }
+
 
 bool Facts::a(int it, const vector <char>& input_file)
 {
@@ -66,9 +74,11 @@ bool Facts::a(int it, const vector <char>& input_file)
 	}
 	else
 	{
+		readings = 0; //because this could be an ID
 		return false;
 	}
 }
+
 
 bool Facts::read(int it, const vector <char>& input_file)
 {
@@ -82,4 +92,19 @@ bool Facts::read(int it, const vector <char>& input_file)
 	{
 		return false;
 	}
+}
+
+
+void Facts::resetReadings()
+{
+	readings = 0;
+}
+
+
+Token Facts::tokenize(unsigned int& current_line, int it, const vector <char>& input_file)
+{
+	string name = "FACTS";
+	string content("Facts");
+	Token token(name, content, current_line);
+	return token;
 }

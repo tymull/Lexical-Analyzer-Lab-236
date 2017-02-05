@@ -26,7 +26,7 @@ string Token::getContent()
 }
 
 
-int Token::getLine()
+int Token::getMyLine()
 {
 	return line;
 }

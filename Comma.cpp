@@ -9,17 +9,12 @@ Comma::~Comma()
 {
 }
 
+
 int Comma::getReadings()
 {
 	return readings;
 }
 
-/*
-bool Comma::getChar()
-{
-	
-}
-*/
 
 bool Comma::read(int it, const vector <char>& input_file)
 {
@@ -34,11 +29,17 @@ bool Comma::read(int it, const vector <char>& input_file)
 	}
 }
 
-Token Comma::tokenize(int it, const vector <char>& input_file)
+
+void Comma::resetReadings()
+{
+	readings = 0;
+}
+
+
+Token Comma::tokenize(unsigned int& current_line, int it, const vector <char>& input_file)
 {
 	string name = "COMMA";
-	string content(input_file[it], input_file[it + readings]);
-	int line = 1;
-	Token token(name, content, line);
+	string content(input_file.begin() + it, input_file.begin() + it + readings); // for some crazy reason, can't put input_file[it]
+	Token token(name, content, current_line);
 	return token;
 }

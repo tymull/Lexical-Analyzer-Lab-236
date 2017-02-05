@@ -10,10 +10,12 @@ QMark::~QMark()
 {
 }
 
+
 int QMark::getReadings()
 {
 	return readings;
 }
+
 
 bool QMark::read(int it, const vector <char>& input_file)
 {
@@ -26,4 +28,19 @@ bool QMark::read(int it, const vector <char>& input_file)
 	{
 		return false;
 	}
+}
+
+
+void QMark::resetReadings()
+{
+	readings = 0;
+}
+
+
+Token QMark::tokenize(unsigned int& current_line, int it, const vector <char>& input_file)
+{
+	string name = "Q_MARK";
+	string content("?");
+	Token token(name, content, current_line);
+	return token;
 }
